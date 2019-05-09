@@ -1,28 +1,72 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <v-app>
+    <!-- Toolbar -->
+    <v-toolbar>
+      <img :src="require('@/assets/logo_unibz.png')" height="36" width="45" />
+      <v-toolbar-title>UNIROOMS</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-side-icon
+        v-if="$vuetify.breakpoint.smAndDown"
+        @click.stop="drawerRight = !drawerRight"
+      ></v-toolbar-side-icon>
+    </v-toolbar>
+    <!-- Content -->
+    <v-content>
+      <v-container></v-container>
+    </v-content>
+    <!-- Drawer -->
+    <v-navigation-drawer
+      v-model="drawerRight"
+      fixed
+      right
+      :temporary="drawerTemporary"
+      :mobile-break-point="mobileBreakPoint"
+      width="380"
+    >
+      <v-toolbar flat>
+        <span class="title">Timetable</span>
+        <v-spacer />
+        <v-toolbar-side-icon
+          v-if="$vuetify.breakpoint.smAndDown"
+          @click.stop="drawerRight = !drawerRight"
+        ></v-toolbar-side-icon>
+      </v-toolbar>
+      <TimeTable />
+    </v-navigation-drawer>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import TimeTable from "./components/TimeTable";
 
 export default {
-  name: "app",
+  name: "App",
   components: {
-    HelloWorld
+    TimeTable
+  },
+  data: () => ({
+    drawerRight: null,
+    mobileBreakPoint: 960
+  }),
+  computed: {
+    drawerTemporary() {
+      var temporary = false;
+      switch (this.$vuetify.breakpoint.name) {
+        case ("xs", "sm"):
+          temporary = true;
+          break;
+        default:
+          temporary = false;
+          break;
+      }
+      return temporary;
+    }
   }
 };
 </script>
 
 <style lang="scss">
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+html {
+  overflow: hidden;
 }
 </style>
