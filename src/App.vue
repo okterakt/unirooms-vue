@@ -41,6 +41,9 @@ import TimeTable from "./components/TimeTable";
 
 export default {
   name: "App",
+  mounted: function() {
+    this.$store.dispatch("getAllLectures");
+  },
   components: {
     TimeTable
   },

@@ -5,10 +5,10 @@
     </div>
     <div>
       <div>
-        <span class="time font-weight-bold"
-          >{{ lect.starttimestamp | formatDate }} -
-          {{ lect.endtimestamp | formatDate }}</span
-        >
+        <span class="time font-weight-bold">
+          {{ formatDate(lect.starttimestamp) }} -
+          {{ formatDate(lect.endtimestamp) }}
+        </span>
         <span class="lect-type">{{ lect.type }}</span>
       </div>
       <div class="lect-title subheading">{{ lect.title }}</div>
@@ -21,13 +21,20 @@
 export default {
   name: "TimeSlot",
   props: ["lect"],
-  filters: {
+  methods: {
+    addZero: function(num) {
+      if (num < 10) {
+        num = "0" + num;
+      }
+      return num;
+    },
     formatDate: function(timestamp) {
       if (!timestamp) return "";
-      var d = new Date(timestamp);
+      var d = new Date(timestamp * 1000);
+      var h = this.addZero(d.getUTCHours());
+      var m = this.addZero(d.getUTCMinutes());
 
-      return d.getHours() + ":" + d.getMinutes();
-      // return moment(String(timestamp)).format("hh:mm");
+      return h + ":" + m;
     }
   }
 };
