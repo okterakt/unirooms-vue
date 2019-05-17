@@ -18,8 +18,8 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    getAllLectures(context) {
-      context.commit("setLectures", Api.getAllLectures());
+    async getAllLectures({ commit }) {
+      commit("setLectures", await Api.getAllLectures());
     }
   }
 });

@@ -21,7 +21,7 @@
       right
       :temporary="drawerTemporary"
       :mobile-break-point="mobileBreakPoint"
-      width="380"
+      :width="drawerWidth"
     >
       <v-toolbar flat>
         <span class="title">Timetable</span>
@@ -49,7 +49,8 @@ export default {
   },
   data: () => ({
     drawerRight: null,
-    mobileBreakPoint: 960
+    mobileBreakPoint: 960,
+    drawerWidth: 400
   }),
   computed: {
     drawerTemporary() {

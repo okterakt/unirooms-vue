@@ -6,8 +6,8 @@
     <div>
       <div>
         <span class="time font-weight-bold">
-          {{ formatDate(lect.starttimestamp) }} -
-          {{ formatDate(lect.endtimestamp) }}
+          {{ formatDate(lect["start-timestamp"]) }} -
+          {{ formatDate(lect["end-timestamp"]) }}
         </span>
         <span class="lect-type">{{ lect.type }}</span>
       </div>
@@ -44,7 +44,7 @@ export default {
 .container {
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 2fr 5fr;
+  grid-template-columns: 1fr 3fr;
   grid-template-rows: 1fr;
 }
 
