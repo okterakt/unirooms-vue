@@ -10,16 +10,33 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    lectures: []
+    lectures: [],
+    loading: false,
+    error: ""
   },
   mutations: {
-    setLectures(state, lectures) {
+    SET_LECTURES(state, lectures) {
       state.lectures = lectures;
+    },
+    SET_LOADING(state, loading) {
+      state.loading = loading;
+    },
+    SET_ERROR(state, error) {
+      state.error = error;
     }
   },
   actions: {
-    async getAllLectures({ commit }) {
-      commit("setLectures", await Api.getAllLectures());
+    getAllLectures({ commit }) {
+      commit("SET_LOADING", true);
+      Api.loadAllLectures()
+        .then(data => {
+          commit("SET_LOADING", false);
+          commit("SET_LECTURES", data);
+        })
+        .catch(error => {
+          commit("SET_LOADING", false);
+          commit("SET_ERROR", error);
+        });
     }
   }
 });

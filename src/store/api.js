@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export default {
-  getAllLectures() {
-    return axios.get("/api").then(response => response.data.data);
+  async loadAllLectures() {
+    const response = await axios.get("/api");
+    return response.data.data;
   }
 };

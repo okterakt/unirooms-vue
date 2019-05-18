@@ -4,7 +4,7 @@ import App from "./App.vue";
 import store from "./store";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://10.7.145.120:9900/";
+axios.defaults.baseURL = "https://thawing-depths-21106.herokuapp.com";
 
 Vue.config.productionTip = false;
 
