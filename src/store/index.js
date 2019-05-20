@@ -28,6 +28,7 @@ export default new Vuex.Store({
   actions: {
     getAllLectures({ commit }) {
       commit("SET_LOADING", true);
+
       Api.loadAllLectures()
         .then(data => {
           commit("SET_LOADING", false);

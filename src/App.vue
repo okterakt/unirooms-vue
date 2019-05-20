@@ -23,15 +23,18 @@
       :mobile-break-point="mobileBreakPoint"
       :width="drawerWidth"
     >
-      <v-toolbar flat>
+      <v-toolbar>
         <span class="title">Timetable</span>
         <v-spacer />
         <v-toolbar-side-icon
           v-if="$vuetify.breakpoint.smAndDown"
           @click.stop="drawerRight = !drawerRight"
-        ></v-toolbar-side-icon>
+        >
+        </v-toolbar-side-icon>
       </v-toolbar>
-      <TimeTable />
+      <v-container style="height: calc(100% - 65px); overflow-y: auto;">
+        <TimeTable />
+      </v-container>
     </v-navigation-drawer>
   </v-app>
 </template>
@@ -50,7 +53,7 @@ export default {
   data: () => ({
     drawerRight: null,
     mobileBreakPoint: 960,
-    drawerWidth: 400
+    drawerWidth: 360
   }),
   computed: {
     drawerTemporary() {
@@ -71,6 +74,6 @@ export default {
 
 <style lang="scss">
 html {
-  overflow: hidden;
+  overflow: auto;
 }
 </style>
