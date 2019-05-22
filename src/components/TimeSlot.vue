@@ -41,6 +41,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$primary-blue-color: #0973ba;
+
 .container {
   box-sizing: border-box;
   display: grid;
@@ -60,7 +62,7 @@ export default {
 }
 
 .room {
-  color: #0973ba;
+  color: $primary-blue-color;
 }
 
 .lect-title {
