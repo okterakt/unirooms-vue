@@ -11,9 +11,14 @@
       ></v-toolbar-side-icon>
     </v-toolbar>
     <!-- Content -->
-    <v-content>
-      <v-container></v-container>
-    </v-content>
+    <v-container class="content-container pa-0 ma-3">
+      <v-breadcrumbs class="pa-1">
+        <v-breadcrumbs-item>Hello</v-breadcrumbs-item>
+        <v-breadcrumbs-item>Hello</v-breadcrumbs-item>
+      </v-breadcrumbs>
+      <SVGBuildings class="pa-1" />
+      <v-pagination class="pa-1" circle :length="4" :value="1"> </v-pagination>
+    </v-container>
     <!-- Drawer -->
     <v-navigation-drawer
       v-model="drawerRight"
@@ -32,7 +37,7 @@
         >
         </v-toolbar-side-icon>
       </v-toolbar>
-      <v-container style="height: calc(100% - 65px); overflow-y: auto;">
+      <v-container class="timetable-container">
         <TimeTable />
       </v-container>
     </v-navigation-drawer>
@@ -41,6 +46,7 @@
 
 <script>
 import TimeTable from "./components/TimeTable";
+import SVGBuildings from "./components/SVGBuildings";
 
 export default {
   name: "App",
@@ -48,7 +54,8 @@ export default {
     this.$store.dispatch("getAllLectures");
   },
   components: {
-    TimeTable
+    TimeTable,
+    SVGBuildings
   },
   data: () => ({
     drawerRight: null,
@@ -73,7 +80,34 @@ export default {
 </script>
 
 <style lang="scss">
+$mobile-breakpoint: 960px;
+$drawer-width: 400px; // accounts for padding/margin...
+
+* {
+  box-sizing: border-box;
+}
+
 html {
   overflow: auto;
+}
+
+.content-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: calc(100vw - #{$drawer-width});
+  @media screen and (max-width: $mobile-breakpoint) {
+    width: 95vw;
+  }
+  height: calc(100vh - 100px);
+}
+
+.timetable-container {
+  height: calc(100% - 65px);
+  overflow-y: auto;
+}
+
+.v-pagination {
+  justify-content: center;
 }
 </style>

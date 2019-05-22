@@ -25,7 +25,7 @@ export default {
   },
   computed: {
     lectures() {
-      return this.$store.state.lectures;
+      return this.$store.state.lecturesToDisplay;
     },
     loading() {
       return this.$store.state.loading;
