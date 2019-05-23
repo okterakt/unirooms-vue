@@ -10,14 +10,18 @@ export default new Vuex.Store({
     lecturesToDisplay: [],
     loading: false,
     error: "",
-    selected: "all"
+    selected: "main",
+    navStack: ["main"]
   },
   getters: {
     lecturesToDisplay: state => {
       return state.displayedLectures;
     },
     selected: state => {
-      return state.selected;
+      return state.navStack[state.navStack.length - 1];
+    },
+    navStack: state => {
+      return state.navStack.map(e => ({ text: e, disabled: false, href: "" }));
     }
   },
   mutations: {
@@ -33,11 +37,22 @@ export default new Vuex.Store({
     },
     SET_SELECTED(state, selected) {
       state.selected = selected;
-      if (selected == "all") state.lecturesToDisplay = state.lectures;
+      if (selected == "main") state.lecturesToDisplay = state.lectures;
       else
         state.lecturesToDisplay = state.lectures.filter(
-          lect => lect.building == selected
+          lect => lect.building == selected[0]
         );
+    },
+    PUSH_TO_NAV_STACK(state, selected) {
+      state.navStack.push(selected);
+    },
+    SLICE_NAV_STACK(state, endIndex) {
+      state.navStack = state.navStack.slice(0, endIndex);
+    },
+    UPDATE_NAV_STACK_TOP(state, floor) {
+      var len = state.navStack.length;
+      var top = state.navStack[len - 1];
+      Vue.set(state.navStack, len - 1, top[0] + floor);
     }
   },
   actions: {

@@ -1,8 +1,12 @@
 <template>
-  <v-container fill-height class="svg-buildings-content">
+  <v-container fill-height class="py-2">
     <v-layout>
-      <BuildingPlant v-if="selected === 'all'" />
-      <CZeroPlant v-if="selected === 'C'" />
+      <BuildingPlant v-if="selected === 'main'" />
+      <BuildingPlant v-if="selected === 'C0'" />
+      <CZeroPlant v-if="selected === 'C1'" />
+      <CZeroPlant v-if="selected === 'C2'" />
+      <CZeroPlant v-if="selected === 'C3'" />
+      <BuildingPlant v-if="selected === 'C4'" />
     </v-layout>
   </v-container>
 </template>
@@ -11,6 +15,8 @@
 import BuildingPlant from "./svgplants/BuildingPlant";
 import CZeroPlant from "./svgplants/CZeroPlant";
 
+import { mapGetters } from "vuex";
+
 export default {
   name: "SVGBuildings",
   components: {
@@ -18,9 +24,7 @@ export default {
     CZeroPlant
   },
   computed: {
-    selected() {
-      return this.$store.getters.selected;
-    }
+    ...mapGetters(["selected"])
   }
 };
 </script>

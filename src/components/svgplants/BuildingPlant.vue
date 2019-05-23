@@ -18,7 +18,7 @@
         fill="none"
       >
         <g id="main: main">
-          <g class="building" id="f_build" @click="selectBuilding('F')">
+          <g class="building" id="f_build" @click="selectBuilding('F0')">
             <g id="f_rectangles">
               <g id="Graphic_49">
                 <rect
@@ -121,7 +121,7 @@
               </g>
             </g>
           </g>
-          <g class="building" id="e_build" @click="selectBuilding('E')">
+          <g class="building" id="e_build" @click="selectBuilding('E0')">
             <g id="e_rectangles">
               <g id="Graphic_51">
                 <rect
@@ -247,7 +247,7 @@
               </g>
             </g>
           </g>
-          <g class="building" id="d_build" @click="selectBuilding('D')">
+          <g class="building" id="d_build" @click="selectBuilding('D0')">
             <g id="Graphic_45">
               <rect x="115" y="527" width="222" height="196" fill="#a5a5a5" />
             </g>
@@ -273,7 +273,7 @@
               </text>
             </g>
           </g>
-          <g class="building" id="c_build" @click="selectBuilding('C')">
+          <g class="building" id="c_build" @click="selectBuilding('C0')">
             <g id="c_rectangles">
               <g id="Graphic_42">
                 <rect
@@ -418,7 +418,7 @@
               </text>
             </g>
           </g>
-          <g class="building" id="a_build" @click="selectBuilding('A')">
+          <g class="building" id="a_build" @click="selectBuilding('A0')">
             <g id="a_rectangles">
               <g id="Graphic_36">
                 <rect
@@ -845,7 +845,7 @@ export default {
   components: {},
   methods: {
     selectBuilding(building) {
-      this.$store.commit("SET_SELECTED", building);
+      this.$store.commit("PUSH_TO_NAV_STACK", building);
     }
   }
 };
