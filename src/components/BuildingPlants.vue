@@ -1,27 +1,35 @@
 <template>
   <v-container fill-height class="py-2">
     <v-layout>
-      <BuildingPlant v-if="selected === 'main'" />
-      <BuildingPlant v-if="selected === 'C0'" />
-      <CZeroPlant v-if="selected === 'C1'" />
-      <CZeroPlant v-if="selected === 'C2'" />
-      <CZeroPlant v-if="selected === 'C3'" />
-      <BuildingPlant v-if="selected === 'C4'" />
+      <MainPlant v-if="selected === 'main'" />
+      <CZeroPlant v-if="selected === 'C0'" />
+      <COnePlant v-if="selected === 'C1'" />
+      <CTwoPlant v-if="selected === 'C2'" />
+      <CThreePlant v-if="selected === 'C3'" />
+      <CFourPlant v-if="selected === 'C4'" />
     </v-layout>
   </v-container>
 </template>
 
 <script>
-import BuildingPlant from "./svgplants/BuildingPlant";
+import MainPlant from "./svgplants/MainPlant";
 import CZeroPlant from "./svgplants/CZeroPlant";
+import COnePlant from "./svgplants/COnePlant";
+import CTwoPlant from "./svgplants/CTwoPlant";
+import CThreePlant from "./svgplants/CThreePlant";
+import CFourPlant from "./svgplants/CFourPlant";
 
 import { mapGetters } from "vuex";
 
 export default {
-  name: "SVGBuildings",
+  name: "BuildingPlants",
   components: {
-    BuildingPlant,
-    CZeroPlant
+    MainPlant,
+    CZeroPlant,
+    COnePlant,
+    CTwoPlant,
+    CThreePlant,
+    CFourPlant
   },
   computed: {
     ...mapGetters(["selected"])
@@ -32,7 +40,6 @@ export default {
 <style lang="scss">
 $mobile-breakpoint: 960px;
 $drawer-width: 360px;
-$primary-blue-color: #0973ba;
 
 [id^="Line_"],
 line {

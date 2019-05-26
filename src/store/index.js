@@ -6,14 +6,22 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    lectures: [],
+    allLectures: [],
     lecturesToDisplay: [],
     loading: false,
     error: "",
-    selected: "main",
     navStack: ["main"]
   },
   getters: {
+    occupiedRooms: state => {
+      var nowts = Date.now();
+      return state.lecturesToDisplay
+        .filter(
+          lect =>
+            lect["start-timestamp"] <= nowts && nowts <= lect["end-timestamp"]
+        )
+        .map(lect => lect.building + lect.floor + lect.room);
+    },
     lecturesToDisplay: state => {
       return state.displayedLectures;
     },
@@ -21,12 +29,12 @@ export default new Vuex.Store({
       return state.navStack[state.navStack.length - 1];
     },
     navStack: state => {
-      return state.navStack.map(e => ({ text: e, disabled: false, href: "" }));
+      return state.navStack.map(e => e.toUpperCase());
     }
   },
   mutations: {
     SET_LECTURES(state, lectures) {
-      state.lectures = lectures;
+      state.allLectures = lectures;
       state.lecturesToDisplay = lectures;
     },
     SET_LOADING(state, loading) {
@@ -35,24 +43,20 @@ export default new Vuex.Store({
     SET_ERROR(state, error) {
       state.error = error;
     },
-    SET_SELECTED(state, selected) {
-      state.selected = selected;
-      if (selected == "main") state.lecturesToDisplay = state.lectures;
-      else
-        state.lecturesToDisplay = state.lectures.filter(
-          lect => lect.building == selected[0]
-        );
-    },
     PUSH_TO_NAV_STACK(state, selected) {
       state.navStack.push(selected);
+      updateLecturesToDisplay(state);
     },
     SLICE_NAV_STACK(state, endIndex) {
       state.navStack = state.navStack.slice(0, endIndex);
+      updateLecturesToDisplay(state);
     },
     UPDATE_NAV_STACK_TOP(state, floor) {
       var len = state.navStack.length;
       var top = state.navStack[len - 1];
+      if (top === "main") return;
       Vue.set(state.navStack, len - 1, top[0] + floor);
+      updateLecturesToDisplay(state);
     }
   },
   actions: {
@@ -71,3 +75,13 @@ export default new Vuex.Store({
     }
   }
 });
+
+function updateLecturesToDisplay(state) {
+  var len = state.navStack.length;
+  var top = state.navStack[len - 1];
+  if (top == "main") state.lecturesToDisplay = state.allLectures;
+  else
+    state.lecturesToDisplay = state.allLectures.filter(
+      lect => lect.building == top[0] && lect.floor == top[1]
+    );
+}
