@@ -6,6 +6,9 @@
       color="#0973ba"
       v-if="loading"
     ></v-progress-circular>
+    <span v-if="!loading && lectures.length == 0" class="no-lectures-msg body-2"
+      >NO LECTURES TO DISPLAY</span
+    >
     <v-list class="timeslot-list py-0">
       <div class="px-4 py-0">
         <TimeSlot v-for="(lect, index) in lectures" :lect="lect" :key="index" />
@@ -34,6 +37,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$color-primary: #0973ba;
+
 .timetable-container {
   display: flex;
   flex-direction: column;
@@ -45,5 +50,10 @@ export default {
 
 .progress-bar {
   align-self: center;
+}
+
+.no-lectures-msg {
+  align-self: center;
+  color: $color-primary;
 }
 </style>

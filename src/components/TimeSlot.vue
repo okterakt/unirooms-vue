@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$primary-blue-color: #0973ba;
+$color-primary: #0973ba;
 
 .container {
   box-sizing: border-box;
@@ -62,7 +62,7 @@ $primary-blue-color: #0973ba;
 }
 
 .room {
-  color: $primary-blue-color;
+  color: $color-primary;
 }
 
 .lect-title {
