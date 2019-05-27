@@ -77,8 +77,10 @@
               width="163"
               height="155.27435"
               fill="#dadada"
-              class="free"
-              :class="{ occuped: isRoomOccupied('C306') }"
+              :class="{
+                occupied: isRoomOccupied('C306'),
+                free: !isRoomOccupied('C306')
+              }"
             />
           </g>
           <g id="Graphic_45">
@@ -106,8 +108,10 @@
               width="163"
               height="92.2735"
               fill="#dadada"
-              class="free"
-              :class="{ occuped: isRoomOccupied('C305') }"
+              :class="{
+                occupied: isRoomOccupied('C305'),
+                free: !isRoomOccupied('C305')
+              }"
             />
           </g>
           <g id="Graphic_51">
@@ -135,8 +139,10 @@
               width="163"
               height="92.2735"
               fill="#dadada"
-              class="free"
-              :class="{ occuped: isRoomOccupied('C304') }"
+              :class="{
+                occupied: isRoomOccupied('C304'),
+                free: !isRoomOccupied('C304')
+              }"
             />
           </g>
           <g id="Graphic_52">
@@ -164,8 +170,10 @@
               width="163"
               height="93.2735"
               fill="#dadada"
-              class="free"
-              :class="{ occuped: isRoomOccupied('C303') }"
+              :class="{
+                occupied: isRoomOccupied('C303'),
+                free: !isRoomOccupied('C303')
+              }"
             />
           </g>
           <g id="Graphic_53">
@@ -193,8 +201,10 @@
               width="162.06"
               height="123.09999"
               fill="#dadada"
-              class="free"
-              :class="{ occuped: isRoomOccupied('C302') }"
+              :class="{
+                occupied: isRoomOccupied('C302'),
+                free: !isRoomOccupied('C302')
+              }"
             />
           </g>
           <g id="Graphic_54">
@@ -222,8 +232,10 @@
               width="163"
               height="243.87"
               fill="#dadada"
-              class="free"
-              :class="{ occuped: isRoomOccupied('C301') }"
+              :class="{
+                occupied: isRoomOccupied('C301'),
+                free: !isRoomOccupied('C301')
+              }"
             />
           </g>
           <g id="Graphic_55">

@@ -14,11 +14,13 @@ export default new Vuex.Store({
   },
   getters: {
     occupiedRooms: state => {
-      var nowts = Date.now();
+      // 3600 * 2 * 1000 = 7200000 adds 2 hours to account for the timezone GMT +2
+      var nowts = Date.now() + 7200000;
       return state.lecturesToDisplay
         .filter(
           lect =>
-            lect["start-timestamp"] <= nowts && nowts <= lect["end-timestamp"]
+            lect["start-timestamp"] * 1000 <= nowts &&
+            nowts <= lect["end-timestamp"] * 1000
         )
         .map(lect => lect.building + lect.floor + lect.room);
     },
