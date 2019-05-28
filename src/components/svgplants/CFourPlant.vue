@@ -649,7 +649,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$color-room-occupied: #f44336;
+$color-room-occupied: #dc143c;
 $color-room-free: #15b53b;
 
 .occupied {

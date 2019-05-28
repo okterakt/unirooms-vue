@@ -31,7 +31,7 @@ export default new Vuex.Store({
       return state.navStack[state.navStack.length - 1];
     },
     navStack: state => {
-      return state.navStack.map(e => e.toUpperCase());
+      return state.navStack.map(e => changeMain(e));
     }
   },
   mutations: {
@@ -86,4 +86,9 @@ function updateLecturesToDisplay(state) {
     state.lecturesToDisplay = state.allLectures.filter(
       lect => lect.building == top[0] && lect.floor == top[1]
     );
+}
+
+function changeMain(e) {
+  if (e == "main") return "University";
+  return e;
 }

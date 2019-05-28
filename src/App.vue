@@ -61,7 +61,7 @@ export default {
   data: () => ({
     drawerRight: null,
     mobileBreakPoint: 960,
-    drawerWidth: 360
+    drawerWidth: 400
   }),
   computed: {
     drawerTemporary() {
@@ -82,7 +82,7 @@ export default {
 
 <style lang="scss">
 $mobile-breakpoint: 960px;
-$drawer-width: 400px; // accounts for padding/margin...
+$drawer-width: 440px; // accounts for padding/margin...
 $color-primary: #1976d2;
 $color-primary-dark: #004ba0;
 
