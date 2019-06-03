@@ -845,28 +845,46 @@ export default {
 $mobile-breakpoint: 960px;
 $drawer-width: 360px;
 $color-primary-dark: #004ba0;
+
 .building {
   cursor: pointer;
+
+  @media screen and (max-width: $mobile-breakpoint) {
+    &:active {
+      rect {
+        fill: $color-primary-dark;
+      }
+
+      tspan,
+      .elev,
+      .arrow {
+        fill: white;
+      }
+
+      .icon {
+        fill: none;
+        stroke: white;
+      }
+    }
+  }
+
   @media screen and (min-width: $mobile-breakpoint) {
     &:hover rect {
       fill: $color-primary-dark;
     }
-    &:hover tspan {
-      fill: white;
+
+    &:hover {
+      tspan,
+      .elev,
+      .arrow {
+        fill: white;
+      }
+
+      .icon {
+        fill: none;
+        stroke: white;
+      }
     }
-    &:hover .elev {
-      fill: white;
-    }
-    &:hover .icon {
-      fill: none;
-      stroke: white;
-    }
-    &:hover .arrow {
-      fill: white;
-    }
-  }
-  &:active rect {
-    fill: $color-primary-dark;
   }
 }
 .section {
