@@ -223,7 +223,7 @@
             />
           </g>
           <g id="Graphic_54">
-            <text transform="translate(210 580)" fill="#143494">
+            <text transform="translate(164 580)" fill="#143494">
               <tspan
                 id="C002-text"
                 font-family="DIN Alternate"
@@ -233,7 +233,7 @@
                 x="0"
                 y="43"
               >
-                02
+                C0.02
               </tspan>
             </text>
           </g>

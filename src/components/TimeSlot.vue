@@ -1,9 +1,12 @@
 <template>
-  <div class="container my-4 pa-0">
-    <div class="room font-weight-bold">
-      {{ lect.building }}{{ lect.floor }}.{{ lect.room }}
-    </div>
-    <div>
+  <div
+    class="slot-contianer my-4 pa-1"
+    v-bind:class="getLectStatusFontClass(lect)"
+  >
+    <div class="hour-container">
+      <div class="room font-weight-bold">
+        {{ lect.building }}{{ lect.floor }}.{{ lect.room }}
+      </div>
       <div>
         <span class="time font-weight-bold">
           {{ formatDate(lect["start-timestamp"]) }} -
@@ -11,8 +14,18 @@
         </span>
         <span class="lect-type">{{ lect.type }}</span>
       </div>
-      <div class="lect-title subheading">{{ formatLecTitle(lect.title) }}</div>
-      <div class="lecturer text-uppercase">{{ lect.lecturer }}</div>
+    </div>
+
+    <div class="lecuture-container">
+      <div v-bind:class="getLectStatusClass(lect)">
+        {{ getLectStatus(lect) }}
+      </div>
+      <div>
+        <div class="lect-title subheading">
+          {{ formatLecTitle(lect.title) }}
+        </div>
+        <div class="lecturer text-uppercase">{{ lect.lecturer }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -38,6 +51,31 @@ export default {
     },
     formatLecTitle: function(title) {
       return title.split("_").join(" ");
+    },
+    getLectStatusFontClass(lect) {
+      let now = +(new Date() / 1000) + 7200;
+      let et = +new Date(lect["end-timestamp"]);
+      if (now > et) return "grey-box";
+      let st = +new Date(lect["start-timestamp"]);
+      if (now < st) return "green-box";
+      return "yellow-box";
+    },
+    getLectStatusClass(lect) {
+      // Finished, Going on, Coming up
+      let now = +(new Date() / 1000) + 7200;
+      let et = +new Date(lect["end-timestamp"]);
+      if (now > et) return "lecture-finished";
+      let st = +new Date(lect["start-timestamp"]);
+      if (now < st) return "lecture-coming-up";
+      return "lecture-going-on";
+    },
+    getLectStatus(lect) {
+      let now = +(new Date() / 1000) + 7200;
+      let et = parseInt(lect["end-timestamp"]);
+      if (now > et) return "Finished";
+      let st = parseInt(lect["start-timestamp"]);
+      if (now < st) return "Coming up";
+      return "In progress";
     }
   }
 };
@@ -45,11 +83,39 @@ export default {
 
 <style lang="scss" scoped>
 $color-primary: #0973ba;
+.lecture-finished {
+  font-weight: 500;
+  color: #aaa;
+}
+.lecture-coming-up {
+  font-weight: 500;
+  color: rgb(201, 204, 39);
+}
+.lecture-going-on {
+  font-weight: 500;
+  color: #15b53b;
+}
 
-.container {
+.grey-box {
+  color: #b9b9b9 !important;
+}
+
+.slot-contianer {
+  width: 100%;
+  padding: 2px auto;
+}
+
+.hour-container {
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 2.5fr;
+  grid-template-rows: 1fr;
+}
+
+.lecuture-container {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 2.5fr;
   grid-template-rows: 1fr;
 }
 
@@ -60,7 +126,7 @@ $color-primary: #0973ba;
 }
 
 .lect-type {
-  color: #757575;
+  color: #b9b9b9;
   font-weight: 500;
 }
 
