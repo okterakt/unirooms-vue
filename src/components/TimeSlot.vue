@@ -11,7 +11,7 @@
         </span>
         <span class="lect-type">{{ lect.type }}</span>
       </div>
-      <div class="lect-title subheading">{{ lect.title }}</div>
+      <div class="lect-title subheading">{{ formatLecTitle(lect.title) }}</div>
       <div class="lecturer text-uppercase">{{ lect.lecturer }}</div>
     </div>
   </div>
@@ -35,6 +35,9 @@ export default {
       var m = this.addZero(d.getUTCMinutes());
 
       return h + ":" + m;
+    },
+    formatLecTitle: function(title) {
+      return title.split("_").join(" ");
     }
   }
 };
