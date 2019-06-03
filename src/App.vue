@@ -26,7 +26,7 @@
       :width="drawerWidth"
     >
       <v-toolbar>
-        <span class="title">Timetable</span>
+        <span class="title">Timetable - {{ toDate() }}</span>
         <v-spacer />
         <v-toolbar-side-icon
           v-if="$vuetify.breakpoint.smAndDown"
@@ -75,6 +75,13 @@ export default {
           break;
       }
       return temporary;
+    }
+  },
+  methods: {
+    toDate: () => {
+      var d = new Date();
+      var date = d.toUTCString().split(" ");
+      return date[0] + " " + date[1] + " " + date[2] + " " + date[3];
     }
   }
 };
